@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.input {
+  @apply w-80 h-12 rounded-lg px-2 bg-slate-800 text-white block border-2;
+}
+
+.label {
+  @apply mt-4 text-white font-bold;
+}
+
+@keyframes pulse {
+  50% {
+    color: black;
+  }
+}
+.animate-pulse-color-black {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

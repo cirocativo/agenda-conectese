@@ -1,14 +1,9 @@
 import "./Global.css";
 import { Header } from "./Components/Header";
-import { LoginForm } from "./Components/LoginForm";
-
+import { RegisterForm } from "./pages/RegisterForm";
+import { Router } from "./routes";
 function App() {
-  return (
-    <div className="w-screen h-screen">
-      <Header title="ConecteSe"></Header>
-      <LoginForm></LoginForm>
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;
