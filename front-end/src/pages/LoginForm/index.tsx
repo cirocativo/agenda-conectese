@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { useUser } from "../../providers/User";
+import { user as userBD } from "./user";
 
 interface ILoginFormValues {
   email: string;
@@ -16,6 +18,7 @@ const schema = yup.object({
 
 export function LoginForm() {
   const navigate = useNavigate();
+  const { setUser } = useUser();
 
   const {
     register,
@@ -26,6 +29,7 @@ export function LoginForm() {
   });
 
   const useLogin = (data: ILoginFormValues) => {
+    setUser(userBD);
     navigate("/dashboard");
   };
 

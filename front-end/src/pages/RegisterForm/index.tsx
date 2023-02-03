@@ -63,7 +63,7 @@ export function RegisterForm() {
             {errors.name?.message}
           </span>
         </label>
-        <label className="label">
+        <label className="label text-white">
           E-mail{" "}
           <input
             type="email"
@@ -77,7 +77,7 @@ export function RegisterForm() {
           </span>
         </label>
 
-        <label className="label">
+        <label className="label text-white">
           Telefone
           <input
             type="text"
@@ -90,7 +90,7 @@ export function RegisterForm() {
             {errors.phone?.message}
           </span>
         </label>
-        <label className="label">
+        <label className="label text-white">
           Senha
           <input
             type="password"
@@ -103,7 +103,7 @@ export function RegisterForm() {
             {errors.password?.message}
           </span>
         </label>
-        <label className="label">
+        <label className="label text-white">
           Confirmar Senha
           <input
             type="password"
