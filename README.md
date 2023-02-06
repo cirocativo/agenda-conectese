@@ -1,26 +1,27 @@
-# cadastro-de-clientes
+# Agenda ConectSe
+
 Projeto Full-stack - Cadastro e consulta de clientes com vínculo de contatos
 
 ## Tecnologias Utilizadas
 
 ### Front-End - React.js
 - Typescript
-- Estilização com Tailwind CSS
-- Rotas protegidas com react-router-dom v6
+- Tailwind CSS
+- react-router-dom v6
 - Hook Form
 - Validações com Yup
-- Dados globais com Context
+- Context
 - Modais e toast com Chakra-ui
 - Acesso a API com axios
 - React-icons
 
 ### Back-End
 - Framework Express
-- Entidades com TypeORM
-- Banco de Dados com PostgreSQL
+- TypeORM
+- PostgreSQL
+- JsonWebToken
 - Encriptação de senha com bcryptjs
 - Documentação feita com Swagger e arquivos .yml
-- jswebtoken
 - Middlewares para autenticação e tratamento de erros
 
 ## Instalação
@@ -70,6 +71,40 @@ yarn install
 
 Toda a documentação está no endpoint "/docs", toda feita através da API Swagger:
 
-`http://localhost/3000/docs`
+http://localhost/3000/docs
+
+Todos os endpoints:
+
+POST
+/contacts
+
+GET
+/contacts
+
+PATCH
+/contacts/{contactId}
+
+DELETE
+/contacts/{contactId}
+
+----------------------
+POST
+/login
+
+----------------------
+POST
+/users
+
+GET
+/users
+
+PATCH
+/users
+
+DELETE
+/users
+
+GET
+/users/profile
 
 
