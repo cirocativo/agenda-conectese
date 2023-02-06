@@ -62,11 +62,11 @@ export const Dashboard = () => {
         onClose={onCloseEditClientModal}
       />
       <div className="w-screen h-5/6 flex flex-col mt-10">
-        <div className="flex justify-between">
+        <div className="flex justify-between flex-wrap">
           <h2 className="ml-40 text-3xl font-bold text-red-100">
-            Bem vindo, {user?.name}
+            Bem vindo, {user?.name.split(" ")[0]}
           </h2>
-          <nav className="flex justify-end pr-8 items-start">
+          <nav className="flex justify-end pr-8 items-start flex-wrap">
             <Button
               text="Novo Contato"
               onClick={onOpenCreateModal}
