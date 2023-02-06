@@ -1,0 +1,62 @@
+paths:
+  /login:
+    post:
+      tags:
+        - Login
+      description: Realiza Login na API
+      produces:
+        - application/json
+      parameters:
+        - name: dados de login
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                format: email
+              password:
+                type: string
+                default: "12345678"
+      responses:
+        200:
+          description: Usuário logado com sucesso
+          schema:
+            type: object
+            properties:
+              user:
+                $ref: "#/definitions/User"
+              token:
+                type: string
+                default: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbSI6ZmFsc2UsImVtYWlsIjoidXNlckBnbWFpbC5jb20iLCJpYXQiOjE2NzU3MTc2NDAsImV4cCI6MTY3NTgwNDA0MCwic3ViIjoiYTEzZGE3MGMtNTY5ZS00YTY4LWJjZGYtMDBiMGFhZDJjOTBkIn0.y1S2aPBX7CUjxzudCQ3U24EpCUDWP88DJOUR0S4skfU"
+        403:
+          description: Acesso negado. Email ou senha incorretos.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Wrong e-mail/password"
+
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        default: "User"
+      email:
+        type: string
+        format: email
+      phone:
+        type: string
+        default: "092995587998"
+      isAdm:
+        type: boolean
+      createdOn:
+        type: string
+        format: date-time

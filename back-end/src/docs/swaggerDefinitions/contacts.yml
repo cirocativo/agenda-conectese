@@ -1,0 +1,227 @@
+paths:
+  /contacts:
+    post:
+      tags:
+        - Contact
+      description: Cria um novo contato a partir do Contato logado
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ContactInput"
+      responses:
+        201:
+          description: Contato criado com sucesso
+          schema:
+            $ref: "#/definitions/Contact"
+
+    get:
+      tags:
+        - Contact
+      description: Retorna a lista de Contatos do usuário logado
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer Token
+          required: true
+
+      responses:
+        200:
+          description: Lista de Contatos retornada com sucesso
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Contact"
+        403:
+          description: Acesso negado. Você precisa estar autenticado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Unauthorized"
+
+  /contacts/{contactId}:
+    patch:
+      tags:
+        - Contact
+      description: Alterar dados de um contato do usuário logado através do ID
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+        - in: path
+          name: contactId
+          description: ID do contato a ser alterado
+          required: true
+          schema:
+            type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ContactUpdateInput"
+      responses:
+        201:
+          description: Contato alterado com sucesso
+          schema:
+            $ref: "#/definitions/Contact"
+        403:
+          description: Acesso negado. Você precisa ser estar autenticado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Unauthorized"
+
+    delete:
+      tags:
+        - Contact
+      description: Excluir um contato do usuário logado através do ID
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+        - in: path
+          name: contactId
+          description: ID do contato a ser alterado
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Contato deletado com sucesso
+        403:
+          description: Acesso negado. Você precisa ser estar autenticado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Unauthorized"
+
+definitions:
+  Contact:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        default: "Contact"
+      email:
+        type: string
+        format: email
+      phone:
+        type: string
+        default: "092995587998"
+      isAdm:
+        type: boolean
+      createdOn:
+        type: string
+        format: date-time
+
+  ContactCreatedResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        default: "Contact"
+      email:
+        type: string
+        format: email
+      phone:
+        type: string
+        default: "092995587998"
+      isAdm:
+        type: boolean
+      createdOn:
+        type: string
+        format: date-time
+      user:
+        schema:
+          $ref: "#/definitions/User"
+
+  ContactInput:
+    type: object
+    properties:
+      email:
+        type: string
+        format: email
+        required: true
+      name:
+        type: string
+        required: true
+        default: "Contact"
+      password:
+        type: string
+        required: true
+        default: "12345678"
+      phone:
+        type: string
+        required: true
+        default: "092995587998"
+      isAdm:
+        type: boolean
+        required: true
+
+  ContactUpdateInput:
+    type: object
+    properties:
+      email:
+        type: string
+        format: email
+        required: false
+      name:
+        type: string
+        required: false
+        default: "Contact"
+      password:
+        type: string
+        required: false
+        default: "12345678"
+      phone:
+        type: string
+        default: "092995587998"
+        required: false
+
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        default: "User"
+      email:
+        type: string
+        format: email
+      phone:
+        type: string
+        default: "092995587998"
+      isAdm:
+        type: boolean
+      createdOn:
+        type: string
+        format: date-time

@@ -6,6 +6,8 @@ import errorHandlingMiddleware from "./middlewares/errorHandling.middleware";
 import { loginRouter } from "./routes/login.route";
 import { contactRouter } from "./routes/contacts.route";
 import cors from "cors";
+import swaggerUI from "swagger-ui-express";
+import swaggerSpec from "./docs/swaggerSpec";
 
 export const app = express();
 
@@ -18,3 +20,5 @@ app.use("/contacts", contactRouter);
 app.use("/login", loginRouter);
 app.use("/error", errorRouter);
 app.use(errorHandlingMiddleware);
+
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));

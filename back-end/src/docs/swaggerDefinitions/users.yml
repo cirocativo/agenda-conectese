@@ -1,0 +1,190 @@
+paths:
+  /users:
+    post:
+      tags:
+        - User
+      description: Cria um novo usuário
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/UserInput"
+      responses:
+        201:
+          description: Usuário criado com sucesso
+          schema:
+            $ref: "#/definitions/User"
+
+    get:
+      tags:
+        - User
+      description: Retorna a lista de usuários
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer Token
+          required: true
+
+      responses:
+        200:
+          description: Lista de usuários retornada com sucesso
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/User"
+        403:
+          description: Acesso negado. Você precisa ser administrador para acessar esta informação.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Unauthorized"
+
+    patch:
+      tags:
+        - User
+      description: Altera dados do usuário logado
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/UserUpdateInput"
+      responses:
+        201:
+          description: Usuário alterado com sucesso
+          schema:
+            $ref: "#/definitions/User"
+        403:
+          description: Acesso negado. Você precisa ser estar autenticado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Unauthorized"
+
+    delete:
+      tags:
+        - User
+      description: Excluir usuário logado
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+
+      responses:
+        204:
+          description: Usuário deletado com sucesso
+
+        403:
+          description: Acesso negado. Você precisa ser estar autenticado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Unauthorized"
+  /users/profile:
+    get:
+      tags:
+        - User
+      description: Retorna os dados do usuário logado
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+
+      responses:
+        200:
+          description: Informações do usuário
+          schema:
+            $ref: "#/definitions/User"
+        403:
+          description: Acesso negado. Você precisa ser estar autenticado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Unauthorized"
+
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+        default: "User"
+      email:
+        type: string
+        format: email
+      phone:
+        type: string
+        default: "092995587998"
+      isAdm:
+        type: boolean
+      createdOn:
+        type: string
+        format: date-time
+
+  UserInput:
+    type: object
+    properties:
+      email:
+        type: string
+        format: email
+        required: true
+      name:
+        type: string
+        required: true
+      password:
+        type: string
+        required: true
+      phone:
+        type: string
+        required: true
+        default: "092995587998"
+      isAdm:
+        type: boolean
+        required: true
+
+  UserUpdateInput:
+    type: object
+    properties:
+      email:
+        type: string
+        format: email
+        required: false
+      name:
+        type: string
+        required: false
+      password:
+        type: string
+        required: false
+      phone:
+        type: string
+        default: "092995587998"
+        required: false
