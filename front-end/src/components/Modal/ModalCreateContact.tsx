@@ -13,6 +13,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import "yup-phone";
 
+import { IContactRequest, useContact } from "../../providers/Contacts";
+
 interface IModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -34,6 +36,7 @@ const schema = yup.object({
 });
 
 export default function ModalCreateContact({ isOpen, onClose }: IModalProps) {
+  const { createContact, refreshContactList } = useContact();
   const {
     register,
     handleSubmit,
@@ -42,18 +45,24 @@ export default function ModalCreateContact({ isOpen, onClose }: IModalProps) {
     resolver: yupResolver(schema),
   });
 
-  const createContact = (data: IRegisterFormValues) => {
+  const handleNewContact = async (data: IContactRequest) => {
     console.log(data);
+    createContact(data);
+    onClose();
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      onCloseComplete={refreshContactList}
+    >
       <ModalOverlay color="red" />
       <ModalContent backgroundColor="rgb(210 210 210)">
         <ModalHeader>Novo Contato</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <form onSubmit={handleSubmit(createContact)}>
+          <form onSubmit={handleSubmit(handleNewContact)}>
             <label className="font-bold">
               Nome Completo
               <input

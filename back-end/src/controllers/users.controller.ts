@@ -4,6 +4,7 @@ import { IUserUpdate } from "../interfaces";
 import {
   createUserService,
   deleteUserService,
+  getUserProfileService,
   getUsersService,
   updateUserService,
 } from "../services/users.service";
@@ -17,6 +18,17 @@ export const createUserController = async (
   const { password, ...userProps } = await createUserService(newUser);
 
   return response.status(201).json({ ...userProps });
+};
+
+export const getUserProfileController = async (
+  request: Request,
+  response: Response
+) => {
+  const id = request.user.id;
+
+  const user = await getUserProfileService(id);
+
+  return response.json(instanceToPlain(user));
 };
 
 export const getUsersController = async (
@@ -33,7 +45,7 @@ export const updateUserController = async (
   response: Response
 ) => {
   const user: IUserUpdate = request.body;
-  const id: string = request.params.id;
+  const id: string = request.user.id;
 
   const updatedUser = await updateUserService(user, id);
 
@@ -44,7 +56,7 @@ export const deleteUserController = async (
   request: Request,
   response: Response
 ) => {
-  const id: string = request.params.id;
+  const id: string = request.user.id;
 
   await deleteUserService(id);
 

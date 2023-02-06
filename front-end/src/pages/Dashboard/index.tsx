@@ -1,4 +1,3 @@
-import { contacts } from "./contacts";
 import ModalCreate from "../../components/Modal/ModalCreateContact";
 import ModalEdit from "../../components/Modal/ModalEditContact";
 import { useDisclosure } from "@chakra-ui/react";
@@ -7,23 +6,21 @@ import { IoMdAddCircle } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 
-import { useContact } from "../../providers/Contacts";
-import { useUser } from "../../providers/User";
+import { IContactProps, useContact } from "../../providers/Contacts";
+import { IUserProps, useUser } from "../../providers/User";
 import { useNavigate } from "react-router-dom";
-import ModalEditClient from "../../components/Modal/ModalEditClient";
-
-interface IContactProps {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  createdAt: string;
-}
+import ModalEditUser from "../../components/Modal/ModalEditUser";
+import { useEffect, useState } from "react";
+import { useToast } from "@chakra-ui/react";
 
 export const Dashboard = () => {
-  const { setContact } = useContact();
+  const { setContact, contactList, refreshContactList } = useContact();
+
+  const [isContactClicked, setIsContactClicked] = useState(false);
   const { user, setUser } = useUser();
   const navigate = useNavigate();
+
+  const toast = useToast();
   const {
     isOpen: isOpenCreateModal,
     onOpen: onOpenCreateModal,
@@ -41,22 +38,33 @@ export const Dashboard = () => {
   } = useDisclosure();
 
   function onLogOut() {
-    setUser({} as IContactProps);
+    setUser({} as IUserProps);
+    localStorage.clear();
     navigate("/");
   }
+
+  useEffect(() => {
+    refreshContactList();
+  }, []);
 
   return (
     <>
       <ModalCreate isOpen={isOpenCreateModal} onClose={onCloseCreateModal} />
-      <ModalEdit isOpen={isOpenEditModal} onClose={onCloseEditModal} />
-      <ModalEditClient
+      {isContactClicked && (
+        <ModalEdit
+          isOpen={isOpenEditModal}
+          onClose={onCloseEditModal}
+          setIsContactClicked={setIsContactClicked}
+        />
+      )}
+      <ModalEditUser
         isOpen={isOpenEditClientModal}
         onClose={onCloseEditClientModal}
       />
       <div className="w-screen h-5/6 flex flex-col mt-10">
         <div className="flex justify-between">
           <h2 className="ml-40 text-3xl font-bold text-red-100">
-            Bem vindo, {user.name}
+            Bem vindo, {user?.name}
           </h2>
           <nav className="flex justify-end pr-8 items-start">
             <Button
@@ -80,12 +88,13 @@ export const Dashboard = () => {
           </nav>
         </div>
         <ul className="flex flex-wrap mt-10">
-          {contacts.map((contact: IContactProps, index) => (
+          {contactList.map((contact: IContactProps, index) => (
             <li
               key={index}
               className="w-80 border-4 border-transparent m-4 p-4 text-red-200 flex flex-col rounded-lg shadow-lg shadow-red-500 bg-black/40 hover:border-white hover:scale-110 hover:cursor-pointer transition-all"
               onClick={() => {
                 setContact(contact);
+                setIsContactClicked(true);
                 return onOpenEditModal();
               }}
             >

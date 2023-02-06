@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 interface IModalProps {
   isOpen: boolean;
   onClose: () => void;
+  setIsContactClicked: (_: boolean) => void;
 }
 
 interface IRegisterFormValues {
@@ -36,8 +37,13 @@ const schema = yup.object({
     .required("Telefone obrigatório"),
 });
 
-export default function ModalEditContact({ isOpen, onClose }: IModalProps) {
-  const { contact } = useContact();
+export default function ModalEditContact({
+  isOpen,
+  onClose,
+  setIsContactClicked,
+}: IModalProps) {
+  const { contact, editContact, deleteContact, refreshContactList } =
+    useContact();
   const [contactInfo, setContactInfo] = useState(contact);
   useEffect(() => {
     setContactInfo(contact);
@@ -53,21 +59,38 @@ export default function ModalEditContact({ isOpen, onClose }: IModalProps) {
   } = useForm<IRegisterFormValues>({
     resolver: yupResolver(schema),
     defaultValues: defaultValues,
-    mode: "onChange",
   });
 
-  const createContact = (data: IRegisterFormValues) => {
-    console.log(data);
+  const handleEditContact = (data: IRegisterFormValues) => {
+    console.log("arrascaeta", data);
+    editContact(data, contact.id);
+
+    onClose();
+  };
+
+  const handleDeleteContact = () => {
+    deleteContact(contact.id);
+
+    onClose();
+  };
+
+  const handleOnCloseComplete = () => {
+    refreshContactList();
+    setIsContactClicked(false);
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      onCloseComplete={handleOnCloseComplete}
+    >
       <ModalOverlay color="red" />
       <ModalContent backgroundColor="rgb(210 210 210)">
         <ModalHeader>Contato</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <form onSubmit={handleSubmit(createContact)}>
+          <form onSubmit={handleSubmit(handleEditContact)}>
             <label className="font-bold">
               Nome Completo
               <input
@@ -117,7 +140,7 @@ export default function ModalEditContact({ isOpen, onClose }: IModalProps) {
               />
               <Button
                 type="button"
-                onClick={onClose}
+                onClick={handleDeleteContact}
                 text="Excluir"
                 classProps="bg-red-500 text-white  hover:animate-pulse"
                 icon={<BiTrash size={22}></BiTrash>}

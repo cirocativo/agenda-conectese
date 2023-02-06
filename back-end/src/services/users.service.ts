@@ -39,6 +39,16 @@ export const createUserService = async ({
   return user;
 };
 
+export const getUserProfileService = async (id: string): Promise<User> => {
+  const userRepository = AppDataSource.getRepository(User);
+
+  const user = await userRepository.findOneBy({ id });
+
+  if (!user) throw new AppError("User not found", 404);
+
+  return user;
+};
+
 export const getUsersService = async (): Promise<User[]> => {
   const userRepository = AppDataSource.getRepository(User);
 

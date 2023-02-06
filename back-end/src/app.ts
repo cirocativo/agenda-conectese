@@ -5,8 +5,11 @@ import { errorRouter } from "./routes/error.route";
 import errorHandlingMiddleware from "./middlewares/errorHandling.middleware";
 import { loginRouter } from "./routes/login.route";
 import { contactRouter } from "./routes/contacts.route";
+import cors from "cors";
 
 export const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 

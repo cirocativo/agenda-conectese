@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import "yup-phone";
+import { useUser } from "../../providers/User";
 
 interface IRegisterFormValues {
   name: string;
@@ -10,6 +11,7 @@ interface IRegisterFormValues {
   phone: string;
   password: string;
   passwordConfirm: string;
+  isAdm: boolean;
 }
 
 const schema = yup.object({
@@ -28,7 +30,11 @@ const schema = yup.object({
     .oneOf([yup.ref("password"), null], "A senha está diferente"),
 });
 
-export function RegisterForm() {
+export function Register() {
+  const { createUser } = useUser();
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -37,8 +43,10 @@ export function RegisterForm() {
     resolver: yupResolver(schema),
   });
 
-  const registerUser = (data: IRegisterFormValues) => {
-    console.log(data);
+  const registerUser = async (data: IRegisterFormValues) => {
+    let { passwordConfirm, ...newUser } = data;
+    newUser["isAdm"] = false;
+    if (await createUser(newUser)) navigate("/");
   };
 
   return (

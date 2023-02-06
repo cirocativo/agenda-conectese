@@ -5,6 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useUser } from "../../providers/User";
 import { user as userBD } from "./user";
+import api from "../../services/api";
+import axios from "axios";
 
 interface ILoginFormValues {
   email: string;
@@ -16,9 +18,9 @@ const schema = yup.object({
   password: yup.string().required("Senha obrigatória"),
 });
 
-export function LoginForm() {
+export function Login() {
   const navigate = useNavigate();
-  const { setUser } = useUser();
+  const { login } = useUser();
 
   const {
     register,
@@ -28,9 +30,9 @@ export function LoginForm() {
     resolver: yupResolver(schema),
   });
 
-  const useLogin = (data: ILoginFormValues) => {
-    setUser(userBD);
-    navigate("/dashboard");
+  const useLogin = async (data: ILoginFormValues) => {
+    const loggedIn = await login(data);
+    if (loggedIn) navigate("/dashboard");
   };
 
   return (

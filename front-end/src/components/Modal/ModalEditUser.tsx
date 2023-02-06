@@ -15,7 +15,8 @@ import { useForm } from "react-hook-form";
 import "yup-phone";
 
 import { useUser } from "../../providers/User";
-import { useEffect, useState } from "react";
+
+import { useNavigate } from "react-router-dom";
 
 interface IModalProps {
   isOpen: boolean;
@@ -38,7 +39,9 @@ const schema = yup.object({
 });
 
 export default function ModalEditClient({ isOpen, onClose }: IModalProps) {
-  const { user, setUser } = useUser();
+  const { user, editUser, deleteUser } = useUser();
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -47,16 +50,20 @@ export default function ModalEditClient({ isOpen, onClose }: IModalProps) {
   } = useForm<IRegisterFormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
+      name: user!.name,
+      email: user!.email,
+      phone: user!.phone,
     },
   });
 
-  const createContact = (data: IRegisterFormValues) => {
-    console.log(data);
-    setUser({ ...user, ...data });
+  const handleEditUser = (data: IRegisterFormValues) => {
+    editUser(data);
     onClose();
+  };
+
+  const handleDeleteUser = () => {
+    deleteUser();
+    navigate("/");
   };
 
   return (
@@ -66,7 +73,7 @@ export default function ModalEditClient({ isOpen, onClose }: IModalProps) {
         <ModalHeader>Contato</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <form onSubmit={handleSubmit(createContact)}>
+          <form onSubmit={handleSubmit(handleEditUser)}>
             <label className="font-bold">
               Nome Completo
               <input
@@ -116,7 +123,7 @@ export default function ModalEditClient({ isOpen, onClose }: IModalProps) {
               />
               <Button
                 type="button"
-                onClick={onClose}
+                onClick={handleDeleteUser}
                 text="Excluir"
                 classProps="bg-red-500 text-white  hover:animate-pulse"
                 icon={<BiTrash size={22}></BiTrash>}

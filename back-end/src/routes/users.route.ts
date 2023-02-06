@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createUserController,
   deleteUserController,
+  getUserProfileController,
   getUsersController,
   updateUserController,
 } from "../controllers/users.controller";
@@ -17,5 +18,7 @@ userRouter.get(
   ensureIsAdmMiddleware,
   getUsersController
 );
-userRouter.patch("/:id", ensureAuthMiddleware, updateUserController);
-userRouter.delete("/:id", ensureAuthMiddleware, deleteUserController);
+userRouter.get("/profile", ensureAuthMiddleware, getUserProfileController);
+
+userRouter.patch("", ensureAuthMiddleware, updateUserController);
+userRouter.delete("", ensureAuthMiddleware, deleteUserController);
