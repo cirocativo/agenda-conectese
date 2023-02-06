@@ -71,7 +71,7 @@ yarn install
 
 Toda a documentação está no endpoint "/docs", toda feita através da API Swagger:
 
-http://localhost/3000/docs
+http://localhost:3000/docs
 
 Todos os endpoints:
 
