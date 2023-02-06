@@ -30,6 +30,26 @@ Faça o clone do repositório:
 
 ### Front-End
 
-#### 1. Instale os pacotes
+#### Entre na pasta, Instale os pacotes e inicie a aplicação
 
-`yarn install`
+```
+cd agenda-conectese/front-end
+yarn install
+yarn start
+```
+
+### Back-End
+
+#### 1. Entre na pasta e Instale os pacotes
+
+```
+cd agenda-conectese/back-end
+yarn install
+```
+
+#### 2. Crie o arquivo .env e preencha com as informações do seu banco de dados local (Postgres), conforme o arquivo .env.example
+
+#### 3. Inicie o servidor
+
+`yarn dev`
+
