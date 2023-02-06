@@ -19,6 +19,7 @@ Projeto Full-stack - Cadastro e consulta de clientes com vínculo de contatos
 - Entidades com TypeORM
 - Banco de Dados com PostgreSQL
 - Encriptação de senha com bcryptjs
+- Documentação feita com Swagger e arquivos .yml
 - jswebtoken
 - Middlewares para autenticação e tratamento de erros
 
@@ -52,4 +53,23 @@ yarn install
 #### 3. Inicie o servidor
 
 `yarn dev`
+
+## Funcionamento
+
+### Front-End
+
+- Interface simples e intuitiva, possui três páginas: Login, Register, e Dashboard. 
+- A página de Dashboard é acessível apenas depois de estar logado, senão é redirecionado para a página de Login.
+- Na Dashboard, é possível:
+  - Visualizar lista de contatos. Para cada contato, pode-se alterar ou excluir
+  - Criar novo contato
+  - Editar Excluir conta
+  - Sair para tela de Login
+
+### Back-End
+
+Toda a documentação está no endpoint "/docs", toda feita através da API Swagger:
+
+`http://localhost/3000/docs`
+
 
