@@ -6,5 +6,13 @@ export const ProtectedRoutes = () => {
 
   if (loading) return null;
 
-  return user ? <Outlet /> : <Navigate to="/" replace />;
+  return user ? <Outlet /> : <Navigate to="/login" replace />;
+};
+
+export const ProtectedOuterRoute = () => {
+  const { loading, user } = useUser();
+
+  if (loading) return null;
+
+  return user ? <Navigate to="/" replace /> : <Outlet />;
 };

@@ -118,21 +118,21 @@ export default function ModalEditClient({ isOpen, onClose }: IModalProps) {
               <Button
                 type="submit"
                 text="Atualizar"
-                classProps="bg-red-800 text-white hover:bg-red-600"
+                classProps="my-7 bg-red-800 text-white hover:bg-red-600"
                 icon={<GoCheck size={22} />}
               />
               <Button
                 type="button"
                 onClick={handleDeleteUser}
                 text="Excluir"
-                classProps="bg-red-500 text-white  hover:animate-pulse"
+                classProps="my-7 bg-red-500 text-white  hover:animate-pulse"
                 icon={<BiTrash size={22}></BiTrash>}
               />
               <Button
                 type="reset"
                 onClick={onClose}
                 text="Fechar"
-                classProps="bg-red-800 text-white hover:bg-red-600"
+                classProps="my-7 bg-red-800 text-white hover:bg-red-600"
               />
             </div>
           </form>

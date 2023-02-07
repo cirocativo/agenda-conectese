@@ -22,7 +22,7 @@ export const Button = ({
   <button
     type={type}
     onClick={onClick}
-    className={`mb-5 mt-10 p-2 w-80 h-12 border-2 rounded-lg flex gap-2 items-center justify-center font-bold hover:scale-105 transition-all ${classProps}`}
+    className={` my-button ${classProps}`}
     {...rest}
   >
     {icon}

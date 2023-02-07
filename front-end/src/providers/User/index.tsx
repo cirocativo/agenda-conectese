@@ -39,7 +39,7 @@ interface IUserProviderProps {
 
 interface IUserProviderData {
   user: IUserProps | null;
-  setUser: (User: IUserProps) => void;
+  setUser: (user: IUserProps | null) => void;
   login: (loginData: ILoginDataProps) => Promise<boolean>;
   loading: boolean;
   createUser: (user: IUserRequest) => Promise<boolean>;

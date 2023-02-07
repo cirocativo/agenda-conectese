@@ -106,13 +106,13 @@ export default function ModalCreateContact({ isOpen, onClose }: IModalProps) {
             <div className="flex gap-4">
               <Button
                 text="Adicionar"
-                classProps="bg-red-800 text-white hover:bg-red-600"
+                classProps="my-7 bg-red-800 text-white hover:bg-red-600"
                 icon={<IoMdAddCircle size={22} />}
               />
               <Button
                 onClick={onClose}
                 text="Fechar"
-                classProps="bg-red-800 text-white hover:bg-red-600"
+                classProps="my-7 bg-red-800 text-white hover:bg-red-600"
               />
             </div>
           </form>

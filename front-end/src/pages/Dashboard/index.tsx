@@ -3,24 +3,17 @@ import ModalEdit from "../../components/Modal/ModalEditContact";
 import { useDisclosure } from "@chakra-ui/react";
 import { Button } from "../../components/Button";
 import { IoMdAddCircle } from "react-icons/io";
-import { FiLogOut } from "react-icons/fi";
-import { CgProfile } from "react-icons/cg";
 
 import { IContactProps, useContact } from "../../providers/Contacts";
-import { IUserProps, useUser } from "../../providers/User";
-import { useNavigate } from "react-router-dom";
-import ModalEditUser from "../../components/Modal/ModalEditUser";
 import { useEffect, useState } from "react";
-import { useToast } from "@chakra-ui/react";
+import { useUser } from "../../providers/User";
 
 export const Dashboard = () => {
   const { setContact, contactList, refreshContactList } = useContact();
 
   const [isContactClicked, setIsContactClicked] = useState(false);
-  const { user, setUser } = useUser();
-  const navigate = useNavigate();
+  const { user } = useUser();
 
-  const toast = useToast();
   const {
     isOpen: isOpenCreateModal,
     onOpen: onOpenCreateModal,
@@ -31,17 +24,6 @@ export const Dashboard = () => {
     onOpen: onOpenEditModal,
     onClose: onCloseEditModal,
   } = useDisclosure();
-  const {
-    isOpen: isOpenEditClientModal,
-    onOpen: onOpenEditClientModal,
-    onClose: onCloseEditClientModal,
-  } = useDisclosure();
-
-  function onLogOut() {
-    setUser({} as IUserProps);
-    localStorage.clear();
-    navigate("/");
-  }
 
   useEffect(() => {
     refreshContactList();
@@ -57,35 +39,22 @@ export const Dashboard = () => {
           setIsContactClicked={setIsContactClicked}
         />
       )}
-      <ModalEditUser
-        isOpen={isOpenEditClientModal}
-        onClose={onCloseEditClientModal}
-      />
+
       <div className="w-screen h-5/6 flex flex-col mt-10">
-        <div className="flex justify-between flex-wrap">
-          <h2 className="ml-40 text-3xl font-bold text-red-100">
-            Bem vindo, {user?.name.split(" ")[0]}
-          </h2>
-          <nav className="flex justify-end pr-8 items-start flex-wrap">
-            <Button
-              text="Novo Contato"
-              onClick={onOpenCreateModal}
-              classProps="ml-6 w-40 self-start text-red-700 bg-slate-100 hover:bg-red-900 hover:text-slate-100"
-              icon={<IoMdAddCircle color="red" size={22} />}
-            ></Button>
-            <Button
-              text="Editar perfil"
-              onClick={onOpenEditClientModal}
-              classProps="ml-6 w-40 self-start text-red-700 bg-slate-100 hover:bg-red-900 hover:text-slate-100"
-              icon={<CgProfile color="red" size={22} />}
-            ></Button>
-            <Button
-              text="Sair"
-              onClick={onLogOut}
-              classProps="ml-6 w-40 self-start text-red-700 bg-slate-100 hover:bg-red-900 hover:text-slate-100"
-              icon={<FiLogOut color="red" size={22} />}
-            ></Button>
-          </nav>
+        <div className="flex justify-between flex-col">
+          <div className="flex flex-start">
+            <div className="w-1/12 sm:w-40 "></div>
+            <h2 className=" text-3xl font-bold text-red-100">
+              Bem vindo, {user?.name.split(" ")[0]}
+            </h2>
+          </div>
+
+          <Button
+            text="Novo Contato"
+            onClick={onOpenCreateModal}
+            classProps="mx-6 mt-10 w-40 self-start text-red-700 bg-slate-100 hover:bg-red-900 hover:text-slate-100"
+            icon={<IoMdAddCircle color="red" size={22} />}
+          ></Button>
         </div>
         <ul className="flex flex-wrap mt-10">
           {contactList.map((contact: IContactProps, index) => (

@@ -11,13 +11,21 @@
   @apply mt-4 font-bold;
 }
 
-@keyframes pulse {
-  50% {
-    color: black;
+@keyframes pulsera {
+  70% {
+    color: #f76;
   }
 }
 .animate-pulse-color-black {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: pulsera 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.my-button {
+  @apply p-2 h-12 border-2 rounded-lg flex gap-2 items-center justify-center font-bold hover:scale-105 transition-all;
+}
+
+.my-button-red-style {
+  @apply text-red-700 bg-slate-100 hover:bg-red-900 hover:text-slate-100;
 }
 
 .my-font {
