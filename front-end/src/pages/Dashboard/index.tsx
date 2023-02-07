@@ -52,7 +52,7 @@ export const Dashboard = () => {
           <Button
             text="Novo Contato"
             onClick={onOpenCreateModal}
-            classProps="mx-6 mt-10 w-40 self-start text-red-700 bg-slate-100 hover:bg-red-900 hover:text-slate-100"
+            classProps="my-button-red-style my mx-6 mt-10 w-40 self-start"
             icon={<IoMdAddCircle color="red" size={22} />}
           ></Button>
         </div>

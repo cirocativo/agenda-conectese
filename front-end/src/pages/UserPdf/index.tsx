@@ -51,6 +51,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingTop: 5,
   },
+  contactDate: {
+    fontSize: 12,
+    paddingTop: 5,
+    color: "rgba(0, 0, 0, 0.6)",
+  },
 });
 
 const UserPdf = () => {
@@ -58,7 +63,6 @@ const UserPdf = () => {
   const { contactList, refreshContactList } = useContact();
   useEffect(() => {
     refreshContactList();
-    console.log(contactList);
   }, []);
 
   const pdf = () => (
@@ -83,6 +87,9 @@ const UserPdf = () => {
               <Text style={styles.contactName}>Nome: {contact.name}</Text>
               <Text style={styles.contactInfo}>E-mail: {contact.email}</Text>
               <Text style={styles.contactInfo}>Telefone: {contact.phone}</Text>
+              <Text style={styles.contactDate}>
+                Criado em: {contact.createdAt}
+              </Text>
             </View>
           ))}
         </View>

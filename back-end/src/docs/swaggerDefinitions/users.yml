@@ -17,6 +17,14 @@ paths:
           description: Usuário criado com sucesso
           schema:
             $ref: "#/definitions/User"
+        403:
+          description: Não Autorizado, este E-mail já existe.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Unauthorized"
 
     get:
       tags:
@@ -37,6 +45,14 @@ paths:
             type: array
             items:
               $ref: "#/definitions/User"
+        401:
+          description: Acesso negado. Token inválido.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Invalid Token"
         403:
           description: Acesso negado. Você precisa ser administrador para acessar esta informação.
           schema:
@@ -45,6 +61,14 @@ paths:
               message:
                 type: string
                 default: "Unauthorized"
+        404:
+          description: Acesso negado. Usuário não encontrado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "User not found"
 
     patch:
       tags:
@@ -68,6 +92,14 @@ paths:
           description: Usuário alterado com sucesso
           schema:
             $ref: "#/definitions/User"
+        401:
+          description: Acesso negado. Token inválido.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Invalid Token"
         403:
           description: Acesso negado. Você precisa ser estar autenticado.
           schema:
@@ -76,6 +108,14 @@ paths:
               message:
                 type: string
                 default: "Unauthorized"
+        404:
+          description: Acesso negado. Usuário não encontrado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "User not found"
 
     delete:
       tags:
@@ -92,7 +132,14 @@ paths:
       responses:
         204:
           description: Usuário deletado com sucesso
-
+        401:
+          description: Acesso negado. Token inválido.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Invalid Token"
         403:
           description: Acesso negado. Você precisa ser estar autenticado.
           schema:
@@ -101,6 +148,15 @@ paths:
               message:
                 type: string
                 default: "Unauthorized"
+        404:
+          description: Acesso negado. Usuário não encontrado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "User not found"
+
   /users/profile:
     get:
       tags:
@@ -119,6 +175,14 @@ paths:
           description: Informações do usuário
           schema:
             $ref: "#/definitions/User"
+        401:
+          description: Acesso negado. Token inválido.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Invalid Token"
         403:
           description: Acesso negado. Você precisa ser estar autenticado.
           schema:
@@ -127,6 +191,14 @@ paths:
               message:
                 type: string
                 default: "Unauthorized"
+        404:
+          description: Acesso negado. Usuário não encontrado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "User not found"
 
 definitions:
   User:

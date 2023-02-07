@@ -1,7 +1,7 @@
 import AppDataSource from "../data-source";
 import { Contact } from "../entities/contact.entity";
 import { IContactRequest, IContactUpdate } from "../interfaces";
-
+import { validate as uuidValidate } from "uuid";
 import * as bcrypt from "bcryptjs";
 import AppError from "../errors/AppError";
 import { User } from "../entities/user.entity";
@@ -53,6 +53,10 @@ export const updateContactService = async (
 ): Promise<Contact> => {
   const ContactRepository = AppDataSource.getRepository(Contact);
 
+  const isuuidValid = uuidValidate(id);
+
+  if (!isuuidValid) throw new AppError(" Invalid Contact id");
+
   const findContact = await ContactRepository.findOne({
     where: {
       id,
@@ -81,6 +85,10 @@ export const updateContactService = async (
 
 export const deleteContactService = async (id: string, userId: string) => {
   const ContactRepository = AppDataSource.getRepository(Contact);
+
+  const isuuidValid = uuidValidate(id);
+
+  if (!isuuidValid) throw new AppError(" Invalid Contact id");
 
   const findContact = await ContactRepository.findOne({
     where: {

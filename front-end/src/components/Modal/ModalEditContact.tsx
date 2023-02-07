@@ -62,7 +62,6 @@ export default function ModalEditContact({
   });
 
   const handleEditContact = (data: IRegisterFormValues) => {
-    console.log("arrascaeta", data);
     editContact(data, contact.id);
 
     onClose();

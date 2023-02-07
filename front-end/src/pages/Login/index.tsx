@@ -4,7 +4,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useUser } from "../../providers/User";
-import { user as userBD } from "./user";
 import api from "../../services/api";
 import axios from "axios";
 

@@ -39,6 +39,18 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
   const [contactList, setContactList] = useState([] as IContactProps[]);
   const toast = useToast();
 
+  function fixDate(data: IContactProps[]) {
+    const list = [...data];
+
+    list.forEach((contact) => {
+      const date = new Date(contact.createdAt);
+      contact.createdAt =
+        date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+    });
+
+    setContactList(list);
+  }
+
   function showGoodToast(title: string, description: string) {
     toast({
       title: title,
@@ -65,7 +77,8 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
       api.defaults.headers.common.authorization = `Bearer ${token}`;
 
       const { data } = await api.get<IContactProps[]>("contacts/");
-      setContactList(data);
+      //setContactList(data);
+      fixDate(data);
     } catch (error: any) {
       console.error(error.response);
       showBadToast("Ops! Houve algum erro");

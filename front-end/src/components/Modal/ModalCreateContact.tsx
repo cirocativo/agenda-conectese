@@ -45,8 +45,7 @@ export default function ModalCreateContact({ isOpen, onClose }: IModalProps) {
     resolver: yupResolver(schema),
   });
 
-  const handleNewContact = async (data: IContactRequest) => {
-    console.log(data);
+  const handleNewContactClicked = async (data: IContactRequest) => {
     createContact(data);
     onClose();
   };
@@ -62,7 +61,7 @@ export default function ModalCreateContact({ isOpen, onClose }: IModalProps) {
         <ModalHeader>Novo Contato</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <form onSubmit={handleSubmit(handleNewContact)}>
+          <form onSubmit={handleSubmit(handleNewContactClicked)}>
             <label className="font-bold">
               Nome Completo
               <input
@@ -103,14 +102,16 @@ export default function ModalCreateContact({ isOpen, onClose }: IModalProps) {
                 {errors.phone?.message}
               </span>
             </label>
-            <div className="flex gap-4">
+            <div className="flex justify-between">
               <Button
+                type="submit"
                 text="Adicionar"
                 classProps="my-7 bg-red-800 text-white hover:bg-red-600"
                 icon={<IoMdAddCircle size={22} />}
               />
               <Button
                 onClick={onClose}
+                type="reset"
                 text="Fechar"
                 classProps="my-7 bg-red-800 text-white hover:bg-red-600"
               />

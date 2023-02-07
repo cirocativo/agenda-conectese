@@ -21,6 +21,30 @@ paths:
           description: Contato criado com sucesso
           schema:
             $ref: "#/definitions/Contact"
+        401:
+          description: Acesso negado. Token inválido.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Invalid Token"
+        403:
+          description: Acesso negado. Você precisa ser estar autenticado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Unauthorized"
+        404:
+          description: Acesso negado. Usuário não encontrado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "User not found"
 
     get:
       tags:
@@ -41,14 +65,30 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Contact"
+        401:
+          description: Acesso negado. Token inválido.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Invalid Token"
         403:
-          description: Acesso negado. Você precisa estar autenticado.
+          description: Acesso negado. Você precisa ser estar autenticado.
           schema:
             type: object
             properties:
               message:
                 type: string
                 default: "Unauthorized"
+        404:
+          description: Acesso negado. Usuário não encontrado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "User not found"
 
   /contacts/{contactId}:
     patch:
@@ -78,6 +118,14 @@ paths:
           description: Contato alterado com sucesso
           schema:
             $ref: "#/definitions/Contact"
+        401:
+          description: Acesso negado. Token inválido.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Invalid Token"
         403:
           description: Acesso negado. Você precisa ser estar autenticado.
           schema:
@@ -86,6 +134,14 @@ paths:
               message:
                 type: string
                 default: "Unauthorized"
+        404:
+          description: Acesso negado. Usuário não encontrado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "User not found"
 
     delete:
       tags:
@@ -107,6 +163,14 @@ paths:
       responses:
         204:
           description: Contato deletado com sucesso
+        401:
+          description: Acesso negado. Token inválido.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "Invalid Token"
         403:
           description: Acesso negado. Você precisa ser estar autenticado.
           schema:
@@ -115,6 +179,14 @@ paths:
               message:
                 type: string
                 default: "Unauthorized"
+        404:
+          description: Acesso negado. Usuário não encontrado.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                default: "User not found"
 
 definitions:
   Contact:

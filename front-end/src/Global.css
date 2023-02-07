@@ -21,7 +21,7 @@
 }
 
 .my-button {
-  @apply p-2 h-12 border-2 rounded-lg flex gap-2 items-center justify-center font-bold hover:scale-105 transition-all;
+  @apply p-2 h-12 w-40 border-2 rounded-lg flex gap-2 items-center justify-center font-bold hover:scale-105 transition-all;
 }
 
 .my-button-red-style {

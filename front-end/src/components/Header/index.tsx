@@ -29,7 +29,7 @@ export function Header({ title }: IHeaderProps) {
   }
 
   return (
-    <header className="w-screen h-24  flex items-center justify-between shadow-lg shadow-black bg-red-900 ">
+    <header className="w-screen h-24 flex items-center justify-between shadow-lg shadow-black bg-red-900 sticky top-0 left-0 right-0 z-1 ">
       {user && (
         <ModalEditUser
           isOpen={isOpenEditClientModal}
