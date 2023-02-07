@@ -1,18 +1,19 @@
 # Agenda ConectSe
 
-Projeto Full-stack - Cadastro e consulta de clientes com vínculo de contatos
+Projeto Full-stack - Cadastro e consulta de clientes com vínculo de contatos. Layout responsivo
 
 ## Tecnologias Utilizadas
 
 ### Front-End - React.js
 - Typescript
-- Tailwind CSS
+- Tailwind CSS com responsividade
 - react-router-dom v6
 - Hook Form
 - Validações com Yup
 - Context
 - Modais e toast com Chakra-ui
 - Acesso a API com axios
+- react-pdf para gerar relatório em PDF
 - React-icons
 
 ### Back-End
@@ -59,13 +60,18 @@ yarn install
 
 ### Front-End
 
-- Interface simples e intuitiva, possui três páginas: Login, Register, e Dashboard. 
-- A página de Dashboard é acessível apenas depois de estar logado, senão é redirecionado para a página de Login.
+- Interface simples e intuitiva, possui quatro páginas: Login, Register, Dashboard, e UserPdf:
+  - "/" -> Dashboard
+  - "/login" -> Tela de Login
+  - "/register" -> Tela de cadastro de novo usuário
+  - "/pdf" -> Tela de visualização do relatório de todos os contatos
+- A página de Dashboard (principal) é acessível apenas depois de estar logado, senão é redirecionado para a página de Login.
 - Na Dashboard, é possível:
   - Visualizar lista de contatos. Para cada contato, pode-se alterar ou excluir
   - Criar novo contato
-  - Editar Excluir conta
+  - Editar/Excluir conta
   - Sair para tela de Login
+- A página UserPdf mostra um relatório simples de todos os contatos em PDF, onde é possível também fazer o download
 
 ### Back-End
 
