@@ -2,7 +2,6 @@ import AppDataSource from "../data-source";
 import { Contact } from "../entities/contact.entity";
 import { IContactRequest, IContactUpdate } from "../interfaces";
 import { validate as uuidValidate } from "uuid";
-import * as bcrypt from "bcryptjs";
 import AppError from "../errors/AppError";
 import { User } from "../entities/user.entity";
 
@@ -17,11 +16,13 @@ export const createContactService = async (
     id: userId,
   });
 
+  if (!user) throw new AppError(" User not found", 404);
+
   const contact = contactRepository.create({
     name,
     email,
     phone,
-    user: user!,
+    user,
   });
 
   await contactRepository.save(contact);
@@ -43,7 +44,9 @@ export const getContactsService = async (
     },
   });
 
-  return user!.contacts;
+  if (!user) throw new AppError(" User id not found", 404);
+
+  return user.contacts;
 };
 
 export const updateContactService = async (
