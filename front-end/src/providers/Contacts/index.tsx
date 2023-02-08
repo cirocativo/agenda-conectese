@@ -73,11 +73,11 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
   const refreshContactList = async () => {
     try {
       const token = localStorage.getItem("token");
-      console.log("Token: " + token);
+
       api.defaults.headers.common.authorization = `Bearer ${token}`;
-      console.log("bora ver:", api.defaults.headers.common.authorization);
+
       const { data } = await api.get<IContactProps[]>("contacts/");
-      console.log("contatos", data);
+
       fixDate(data);
     } catch (error: any) {
       console.error(error.response);
