@@ -6,7 +6,7 @@ import { Dashboard } from "../pages/Dashboard";
 import {
   ProtectedOuterRoute,
   ProtectedRoutes,
-} from "../components/protectedRoutes";
+} from "../components/ProtectedRoutes";
 import UserPdf from "../pages/UserPdf";
 export const Router = () => {
   return (

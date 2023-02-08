@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import api from "../../services/api";
 import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../User";
 
 export interface IContactProps {
   id: string;
@@ -21,8 +23,6 @@ interface IContactProviderProps {
 }
 
 interface IContactProviderData {
-  contact: IContactProps;
-  setContact: (contact: IContactProps) => void;
   refreshContactList: () => void;
   contactList: IContactProps[];
   createContact: (data: IContactRequest) => void;
@@ -35,9 +35,9 @@ const ContactContext = createContext<IContactProviderData>(
 );
 
 export const ContactProvider = ({ children }: IContactProviderProps) => {
-  const [contact, setContact] = useState<IContactProps>({} as IContactProps);
   const [contactList, setContactList] = useState([] as IContactProps[]);
   const toast = useToast();
+  const { setUser } = useUser();
 
   function fixDate(data: IContactProps[]) {
     const list = [...data];
@@ -73,15 +73,21 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
   const refreshContactList = async () => {
     try {
       const token = localStorage.getItem("token");
-
+      console.log("Token: " + token);
       api.defaults.headers.common.authorization = `Bearer ${token}`;
-
+      console.log("bora ver:", api.defaults.headers.common.authorization);
       const { data } = await api.get<IContactProps[]>("contacts/");
-      //setContactList(data);
+      console.log("contatos", data);
       fixDate(data);
     } catch (error: any) {
       console.error(error.response);
-      showBadToast("Ops! Houve algum erro");
+      if (error.response.status === 404) {
+        showBadToast(
+          "Você foi desconectado. Atualize a págine e tente novamente"
+        );
+        localStorage.clear();
+        setUser(null);
+      } else showBadToast("Ops! Houve algum erro");
     }
   };
 
@@ -95,8 +101,14 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
 
       showGoodToast("Contato criado", "Contato criado com sucesso");
     } catch (error: any) {
-      showBadToast("Ops! Houve algum erro");
       console.error(error.response);
+      if (error.response.status === 404) {
+        showBadToast(
+          "Você foi desconectado. Atualize a págine e tente novamente"
+        );
+        localStorage.clear();
+        setUser(null);
+      } else showBadToast("Ops! Houve algum erro");
     }
   };
 
@@ -110,8 +122,14 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
 
       showGoodToast("Contato atualizado", "Contato editado com sucesso");
     } catch (error: any) {
-      showBadToast("Ops! Houve algum erro");
       console.error(error.response);
+      if (error.response.status === 404) {
+        showBadToast(
+          "Você foi desconectado. Atualize a págine e tente novamente"
+        );
+        localStorage.clear();
+        setUser(null);
+      } else showBadToast("Ops! Houve algum erro");
     }
   };
 
@@ -125,16 +143,20 @@ export const ContactProvider = ({ children }: IContactProviderProps) => {
 
       showGoodToast("Contato excluído", "Contato excluído com sucesso");
     } catch (error: any) {
-      showBadToast("Ops! Houve algum erro");
       console.error(error.response);
+      if (error.response.status === 404) {
+        showBadToast(
+          "Você foi desconectado. Atualize a págine e tente novamente"
+        );
+        localStorage.clear();
+        setUser(null);
+      } else showBadToast("Ops! Houve algum erro");
     }
   };
 
   return (
     <ContactContext.Provider
       value={{
-        contact,
-        setContact,
         refreshContactList,
         contactList,
         createContact,

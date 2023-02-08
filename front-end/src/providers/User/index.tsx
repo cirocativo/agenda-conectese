@@ -162,7 +162,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         } catch (error) {
           console.error(error);
           showBadToast("Você foi desconectado");
-          localStorage.clearItem("token");
+          localStorage.clear();
+          setLoading(false);
         }
       }
       setLoading(false);

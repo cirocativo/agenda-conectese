@@ -13,13 +13,14 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import "yup-phone";
-import { useContact } from "../../providers/Contacts";
+import { IContactProps, useContact } from "../../providers/Contacts";
 import { useEffect, useState } from "react";
 
 interface IModalProps {
   isOpen: boolean;
   onClose: () => void;
-  setIsContactClicked: (_: boolean) => void;
+  contact: IContactProps;
+  // setIsContactClicked: (_: boolean) => void;
 }
 
 interface IRegisterFormValues {
@@ -40,10 +41,10 @@ const schema = yup.object({
 export default function ModalEditContact({
   isOpen,
   onClose,
-  setIsContactClicked,
-}: IModalProps) {
-  const { contact, editContact, deleteContact, refreshContactList } =
-    useContact();
+  contact,
+}: // setIsContactClicked,
+IModalProps) {
+  const { editContact, deleteContact, refreshContactList } = useContact();
   const [contactInfo, setContactInfo] = useState(contact);
   useEffect(() => {
     setContactInfo(contact);
@@ -75,7 +76,7 @@ export default function ModalEditContact({
 
   const handleOnCloseComplete = () => {
     refreshContactList();
-    setIsContactClicked(false);
+    // setIsContactClicked(false);
   };
 
   return (
