@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/agenda-conectese-fullstack/static/css/main.7a6dfc3e.css",
+    "main.js": "/agenda-conectese-fullstack/static/js/main.0cbe768b.js",
+    "static/js/787.47bf6e90.chunk.js": "/agenda-conectese-fullstack/static/js/787.47bf6e90.chunk.js",
+    "index.html": "/agenda-conectese-fullstack/index.html",
+    "main.7a6dfc3e.css.map": "/agenda-conectese-fullstack/static/css/main.7a6dfc3e.css.map",
+    "main.0cbe768b.js.map": "/agenda-conectese-fullstack/static/js/main.0cbe768b.js.map",
+    "787.47bf6e90.chunk.js.map": "/agenda-conectese-fullstack/static/js/787.47bf6e90.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7a6dfc3e.css",
+    "static/js/main.0cbe768b.js"
+  ]
+}
