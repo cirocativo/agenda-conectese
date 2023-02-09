@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/agenda-conectese-fullstack/static/css/main.7a6dfc3e.css",
-    "main.js": "/agenda-conectese-fullstack/static/js/main.0cbe768b.js",
-    "static/js/787.47bf6e90.chunk.js": "/agenda-conectese-fullstack/static/js/787.47bf6e90.chunk.js",
-    "index.html": "/agenda-conectese-fullstack/index.html",
-    "main.7a6dfc3e.css.map": "/agenda-conectese-fullstack/static/css/main.7a6dfc3e.css.map",
-    "main.0cbe768b.js.map": "/agenda-conectese-fullstack/static/js/main.0cbe768b.js.map",
-    "787.47bf6e90.chunk.js.map": "/agenda-conectese-fullstack/static/js/787.47bf6e90.chunk.js.map"
+    "main.css": "/agenda-conectese-fullstack/front-end/static/css/main.7a6dfc3e.css",
+    "main.js": "/agenda-conectese-fullstack/front-end/static/js/main.ce1fa782.js",
+    "static/js/787.47bf6e90.chunk.js": "/agenda-conectese-fullstack/front-end/static/js/787.47bf6e90.chunk.js",
+    "index.html": "/agenda-conectese-fullstack/front-end/index.html",
+    "main.7a6dfc3e.css.map": "/agenda-conectese-fullstack/front-end/static/css/main.7a6dfc3e.css.map",
+    "main.ce1fa782.js.map": "/agenda-conectese-fullstack/front-end/static/js/main.ce1fa782.js.map",
+    "787.47bf6e90.chunk.js.map": "/agenda-conectese-fullstack/front-end/static/js/787.47bf6e90.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7a6dfc3e.css",
-    "static/js/main.0cbe768b.js"
+    "static/js/main.ce1fa782.js"
   ]
 }
