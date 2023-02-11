@@ -54,7 +54,7 @@ yarn install
 
 #### 2. Crie o arquivo .env e preencha com as informações do seu banco de dados local (Postgres), conforme o arquivo .env.example
 
-### 3. Rode as migrations
+#### 3. Rode as migrations
 
 Execute o comando responsável por rodar as migrations e criar as tabelas no seu banco de dados:
 
