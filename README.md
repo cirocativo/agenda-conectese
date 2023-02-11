@@ -29,7 +29,9 @@ Projeto Full-stack - Cadastro e consulta de clientes com vínculo de contatos. L
 
 Faça o clone do repositório:
 
-` git clone git@github.com:cirocativo/agenda-conectese.git`
+```
+git clone git@github.com:cirocativo/agenda-conectese.git
+```
 
 ### Front-End
 
@@ -52,9 +54,19 @@ yarn install
 
 #### 2. Crie o arquivo .env e preencha com as informações do seu banco de dados local (Postgres), conforme o arquivo .env.example
 
-#### 3. Inicie o servidor
+### 3. Rode as migrations
 
-`yarn dev`
+Execute o comando responsável por rodar as migrations e criar as tabelas no seu banco de dados:
+
+```
+yarn typeorm migration:run -d src/data-source.ts
+```
+
+#### 4. Inicie o servidor
+
+```
+yarn dev
+```
 
 ## Funcionamento
 
